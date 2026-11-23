@@ -1,59 +1,113 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { MoreVertical, MessageSquare, ThumbsUp } from 'lucide-react';
 import '../css/MiddleFeed.css';
 
+// 模擬動態消息的初始資料
+const initialPosts = [
+  {
+    id: 1,
+    username: 'liamLee',
+    content: '好了好了 😍',
+    comments: 0,
+    likes: 0,
+    liked: false,
+    createdAt: '2026-11-23T10:30:00',
+  },
+  {
+    id: 2,
+    username: 'liamLee',
+    content: '所以可以用嗎??',
+    comments: 0,
+    likes: 0,
+    liked: false,
+    createdAt: '2026-11-23T11:15:00',
+  },
+  {
+    id: 3,
+    username: 'liamLee',
+    content: '哈囉\n所以\n現在',
+    comments: 1,
+    likes: 1,
+    liked: false,
+    createdAt: '2026-11-23T12:00:00',
+  },
+];
+
+// 將 ISO 時間格式化為「2026/11/23 10:30」
+const formatTime = (iso) =>
+  new Date(iso).toLocaleString('zh-TW', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
 const MiddleFeed = () => {
-  // 模擬動態消息的資料陣列
-  const feedPosts = [
-    {
-      id: 1,
-      author: 'Liam Lin',
-      time: '2 小時前',
-      content: '文件治理系統 (Document Governance) 核心模組初步建置完成。接下來準備處理 Vue.js 前端與 Spring Boot 後端的 API 串接，還有一些權限控管的細節需要重構。',
-      tags: ['#Vue', '#SpringBoot', '#SystemDesign']
-    },
-    {
-      id: 2,
-      author: 'Liam Lin',
-      time: '昨天',
-      content: '在 Hack The Box 針對一台新機器做測試。Nmap 掃描花了不少時間，最後透過一個已知漏洞拿下 User shell，但 Privilege Escalation 的路徑還要再找找。務實推進。',
-      tags: ['#HTB', '#RedTeam', '#PenetrationTesting']
-    },
-    {
-      id: 3,
-      author: 'Liam Lin',
-      time: '3 天前',
-      content: '今日進度：World Gym 跑步機有氧加上核心訓練。回去繼續推進 JLPT N1 的文法進度，Tobira 第五課的句型結構有點複雜，需要多花點時間消化。',
-      tags: ['#Workout', '#JLPT', '#DailyRoutine']
-    }
-  ];
+  const [posts, setPosts] = useState(initialPosts);
+
+  // 切換按讚狀態，同時更新讚數
+  const handleToggleLike = (postId) => {
+    setPosts((prev) =>
+      prev.map((p) =>
+        p.id === postId
+          ? { ...p, liked: !p.liked, likes: p.likes + (p.liked ? -1 : 1) }
+          : p
+      )
+    );
+  };
 
   return (
     <div className="feed-container">
-      {/* 頂部發文區塊 (讓版面結構更完整) */}
-
-
       {/* 動態消息列表 */}
-      <div className="feed-list">
-        {feedPosts.map((post) => (
-          <div key={post.id} className="feed-card">
-            <div className="feed-card-header">
-              <div className="feed-card-avatar"></div>
-              <div className="feed-card-meta">
-                <span className="feed-author">{post.author}</span>
-                <span className="feed-time">{post.time}</span>
+      {posts.map((post) => (
+        <article className="post-card" key={post.id}>
+          <div className="post-body">
+            <header className="post-header">
+              <div className="avatar" aria-hidden="true">
+                {post.username.charAt(0).toUpperCase()}
               </div>
-            </div>
-            <div className="feed-card-content">
-              {post.content}
-            </div>
-            <div className="feed-card-tags">
-              {post.tags.map((tag, index) => (
-                <span key={index} className="tag">{tag}</span>
-              ))}
-            </div>
+              <span className="username">{post.username}</span>
+              <time className="post-time" dateTime={post.createdAt}>
+                {formatTime(post.createdAt)}
+              </time>
+              <button
+                className="more-button"
+                type="button"
+                aria-label="更多選項"
+                title="更多選項（尚未實作）"
+              >
+                <MoreVertical size={18} strokeWidth={1.6} />
+              </button>
+            </header>
+            {/* 內容有 \n 換行，需要 CSS: white-space: pre-wrap（見 .post-content） */}
+            <div className="post-content">{post.content}</div>
           </div>
-        ))}
-      </div>
+          <footer className="post-footer">
+            <div className="action-group" aria-label={`${post.comments} 則留言`}>
+              <MessageSquare size={23} strokeWidth={2.4} />
+              <span>{post.comments}</span>
+              <span className="action-label">Comments</span>
+            </div>
+            <button
+              className={`action-group action-button ${post.liked ? 'liked' : ''}`}
+              type="button"
+              onClick={() => handleToggleLike(post.id)}
+              aria-pressed={post.liked}
+              aria-label={post.liked ? '取消按讚' : '按讚'}
+            >
+              <ThumbsUp
+                size={23}
+                strokeWidth={2.4}
+                fill={post.liked ? 'currentColor' : 'none'}
+              />
+              <span>{post.likes}</span>
+              <span className="action-label">Likes</span>
+            </button>
+          </footer>
+        </article>
+      ))}
     </div>
   );
 };

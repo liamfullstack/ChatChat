@@ -1,122 +1,127 @@
-/* 中間主欄位容器 */
+/* ===== 動態消息容器 ===== */
 .feed-container {
-  width: 100%;
-  max-width: 600px;
-
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 50%;
+  padding: 16px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* 區塊之間的間距 */
 }
 
-/* ==========================================
-   頂部發文區塊
-   ========================================== */
-.feed-create-post {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+/* ===== 貼文卡片 ===== */
+.post-card {
+  background: #fff;
+  border: 1px solid #d9dde3;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
-.create-post-input {
-  background-color: #f5f5f5;
-  color: #888888;
-  padding: 12px 15px;
-  border-radius: 20px;
-  font-size: 14px;
-  margin-bottom: 15px;
-  cursor: text;
+.post-body {
+  padding: 18px 20px 20px;
 }
 
-.create-post-actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.action-btn {
-  background-color: #000000;
-  color: #ffffff;
-  border: none;
-  border-radius: 20px;
-  padding: 6px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.action-btn:hover {
-  background-color: #333333;
-}
-
-/* ==========================================
-   動態消息卡片列表
-   ========================================== */
-.feed-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.feed-card {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-.feed-card-header {
+/* ===== 貼文標頭：頭像 / 名稱 / 時間 / 更多 ===== */
+.post-header {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
-.feed-card-avatar {
-  width: 40px;
-  height: 40px;
-  background-color: #cccccc;
+.avatar {
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  margin-right: 12px;
-}
-
-.feed-card-meta {
-  display: flex;
-  flex-direction: column;
-}
-
-.feed-author {
+  background: #0b4f3c;
+  color: #fff;
   font-size: 15px;
   font-weight: 600;
-  color: #000000;
-}
-
-.feed-time {
-  font-size: 12px;
-  color: #888888;
-  margin-top: 2px;
-}
-
-.feed-card-content {
-  font-size: 14px;
-  color: #333333;
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-.feed-card-tags {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.tag {
+.username {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.post-time {
   font-size: 12px;
-  color: #555555;
-  background-color: #f0f0f0;
-  padding: 4px 10px;
-  border-radius: 12px;
+  color: #9aa0a6;
+}
+
+.more-button {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.more-button:hover {
+  background: #f1f3f5;
+}
+
+/* ===== 貼文內容（支援 \n 換行） ===== */
+.post-content {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1f2937;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ===== 底部操作列 ===== */
+.post-footer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 20px;
+  border-top: 1px solid #d9dde3;
+}
+
+.action-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.action-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #9aa0a6;
+}
+
+/* 按讚按鈕（重置 button 預設樣式） */
+.action-button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.1s ease;
+}
+
+.action-button:hover {
+  color: #0b4f3c;
+}
+
+.action-button:active {
+  transform: scale(0.95);
+}
+
+.action-button.liked {
+  color: #0b4f3c;
 }

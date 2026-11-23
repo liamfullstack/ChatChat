@@ -1,0 +1,87 @@
+.comment-box {
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffffff;
+  padding: 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+}
+
+/* --- 整體容器 --- */
+.comment-node-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 單筆留言外層 --- */
+.comment-item {
+  display: flex;
+  align-items: flex-start; /* 🛡️ 關鍵防護 4：讓頭像靠頂部對齊，嚴格防止被氣泡高度拉長變形 */
+  gap: 12px;
+  margin-bottom: 12px;
+  width: 100%;
+  box-sizing: border-box; 
+}
+
+/* --- 頭像區塊 --- */
+.avatar-placeholder {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #D1D5DB;
+  flex-shrink: 0; /* 🛡️ 關鍵防護 1：禁止頭像被右側的長文字擠壓變形 */
+}
+
+/* --- 對話泡泡區塊 --- */
+.comment-bubble {
+  background-color: #E5E7EB;
+  padding: 12px 16px;
+  border-radius: 16px;
+  flex: 1; /* 自動填滿右側剩餘空間 */
+  min-width: 0; /* 🛡️ 關鍵防護 2：打破 Flexbox 預設的最小寬度，讓內部文字可以順利換行 */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.comment-bubble:hover {
+  background-color: #D1D5DB;
+}
+
+/* --- 名字與內容 --- */
+.comment-author {
+  font-weight: 600;
+  font-size: 14px;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.comment-content {
+  font-size: 15px;
+  color: #333;
+  margin: 0; 
+  word-break: break-word; /* 🛡️ 關鍵防護 3：強制超長連續英數換行，絕對不會衝出泡泡外 */
+  white-space: pre-wrap;  /* 支援資料中的換行符號 */
+}
+
+/* --- 展開/收合提示字 --- */
+.reply-toggle-text {
+  font-size: 12px;
+  color: #6B7280;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* --- 子回覆容器 (階層縮排) --- */
+.replies-container {
+  margin-left: 48px; /* 往右縮排，營造階層感 */
+  border-left: 2px solid #E5E7EB; /* 左側加上引導線 */
+  padding-left: 12px;
+  display: none; /* 預設收合隱藏 */
+  flex-direction: column;
+}
+
+/* 觸發展開狀態 */
+.replies-container.expanded {
+  display: flex; 
+}

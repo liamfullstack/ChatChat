@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  project_mysql:
+    image: mysql:8.0
+    container_name: independent_mysql_env
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: my_social_db  # 自動幫你建好這個資料庫
+      MYSQL_USER: nova_user
+      MYSQL_PASSWORD: nova_password
+    ports:
+      - "3307:3306" # 關鍵：將容器的 3306 映射到本機的 3307
+    volumes:
+      - mysql_data:/var/lib/mysql # 讓資料可以持久化，重開機不會不見
+
+volumes:
+  mysql_data:

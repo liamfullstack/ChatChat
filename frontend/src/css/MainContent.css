@@ -1,0 +1,470 @@
+/* css/mainContent.css */
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+
+  padding: 20px;
+  max-width: 600px;
+  font-family: sans-serif;
+
+  /* 產生垂直滑軌的物理邊界 */
+  height: 100vh;           
+  overflow-y: auto;        
+  box-sizing: border-box;  
+
+  /* 🛡️ 隱藏捲軸指令 (針對 Firefox 與 IE/舊版 Edge) */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+/* 🛡️ 隱藏捲軸指令 (針對 Chrome, Safari, 新版 Edge) */
+.main-content::-webkit-scrollbar {
+  display: none; /* 直接將捲軸的顯示屬性關閉 */
+}
+
+
+/* 發文框外層容器 */
+.post-composer {
+  width: 100%;
+  max-width: 600px; /* 限制一下最大寬度，才不會在大螢幕上拉得太長 */
+  border: 1px solid #1a1a1a; /* 對照設計稿的深色邊框 */
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+/* 文字輸入區 */
+.post-textarea {
+  width: 100%;
+  min-height: 140px; /* 給予足夠的打字空間 */
+  padding: 16px;
+  border: none;
+  outline: none;
+  resize: none; /* 關閉右下角的拖曳縮放，保持版面整齊 */
+  font-size: 16px;
+  background-color: #f3f4f6; /* 淺灰色背景 */
+  color: #1a1a1a;
+  font-family: inherit;
+}
+
+/* 下方工具列 */
+.post-toolbar {
+  display: flex;
+  height: 48px;
+  background-color: #e5e7eb; /* 稍微深一點的灰色 */
+  border-top: 1px solid #1a1a1a; /* 工具列上方的分隔線 */
+}
+
+/* 工具列按鈕通用樣式 */
+.toolbar-btn {
+  width: 56px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-right: 1px solid #1a1a1a; /* 每個按鈕右側的分隔線 */
+  transition: background-color 0.2s ease;
+}
+
+.toolbar-btn:hover {
+  background-color: #d1d5db; /* 滑鼠懸停時的視覺回饋 */
+}
+
+/* 中間的彈性空白區塊 */
+.toolbar-spacer {
+  flex: 1; /* 自動填滿剩餘空間 */
+}
+
+/* 發送按鈕特例處理 */
+.toolbar-btn.submit-btn {
+  border-right: none; /* 最右邊不需要右邊框 */
+  border-left: 1px solid #1a1a1a; /* 改加上左邊框 */
+}
+
+/* SVG 圖示樣式 */
+.toolbar-icon {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #1a1a1a; /* 圖示線條顏色 */
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 如果發送圖示想要實心效果，可以針對它獨立設定 */
+.send-icon {
+  fill: #1a1a1a;
+}
+
+/* 原本的聊天泡泡基礎樣式 (如果你需要的話) */
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* 拉開上下訊息的間距 */
+  width: 100%;
+}
+
+/* 控制訊息整行靠左或靠右 */
+.message-row {
+  display: flex;
+  width: 100%;
+}
+.message-row.left {
+  justify-content: flex-start;
+}
+.message-row.right {
+  justify-content: flex-end;
+}
+
+/* 基礎泡泡樣式 */
+/* 泡泡本身要留出底部空間給功能列，避免文字被功能列遮到 */
+.chat-bubble {
+  position: relative;
+  padding: 10px 14px;
+  padding-bottom: 38px; /* 💡 留白給 ActionBar */
+  border-radius: 16px;
+  word-break: break-all;
+}
+
+/* --- 1. 主貼文 - 自己（右側綠色） --- */
+.bubble-post-right {
+  background-color: #b2ebd4; /* 畫面上亮綠色 */
+  color: #000;
+  border-top-right-radius: 2px;
+  width: 300px;
+  min-height: 100px;
+
+  /* 💡 關鍵 1：讓泡泡內的文字與內容全部靠左對齊 */
+  text-align: left;
+
+  /* 💡 關鍵 2：必須加上相對定位，否則三角形尾巴會定位錯誤、飛出畫面 */
+  position: relative; 
+}
+
+/* 確保三角形尾巴正確貼在右上角 */
+.bubble-post-right::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -8px; /* 根據你的三角形大小調整，讓它緊貼泡泡右側 */
+  border-width: 8px 0 0 8px;
+  border-style: solid;
+  border-color: #b2ebd4 transparent transparent transparent;
+}
+
+/* --- 2. 主貼文 - 別人（左側） --- */
+.bubble-post-left {
+  background-color: #e5e5ea;
+  color: #000;
+  border-top-left-radius: 2px;
+}
+.bubble-post-left::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -8px;
+  border-width: 8px 8px 0 0;
+  border-style: solid;
+  border-color: #e5e5ea transparent transparent transparent;
+}
+
+/* --- 3. 留言 - 自己（右側小泡泡） --- */
+.bubble-comment-right {
+  background-color: #cceeff; /* 畫面上的淡藍色 */
+  color: #000;
+  font-size: 0.9rem; /* 稍微縮小區隔貼文 */
+  border-top-right-radius: 2px;
+  min-width: 180px; 
+  max-width: 75%;
+
+  /* 💡 解決關鍵 2：內邊距調整。上下留好空間，特別是底部（padding-bottom） */
+  padding: 12px 14px 44px 14px; 
+  
+  word-break: break-all;
+}
+.bubble-comment-right::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -8px;
+  border-width: 8px 0 0 8px;
+  border-style: solid;
+  border-color: #cceeff transparent transparent transparent;
+}
+
+/* --- 4. 留言 - 別人（左側小泡泡） --- */
+.bubble-comment-left {
+  background-color: #cceeff; /* 畫面上的淡藍色 */
+  color: #000;
+  font-size: 0.9rem;
+  border-top-left-radius: 2px;
+  min-width: 180px; 
+  max-width: 75%;
+
+  /* 💡 解決關鍵 2：內邊距調整。上下留好空間，特別是底部（padding-bottom） */
+  padding: 12px 14px 44px 14px; 
+  
+  word-break: break-all;
+}
+.bubble-comment-left::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -8px;
+  border-width: 8px 8px 0 0;
+  border-style: solid;
+  border-color: #cceeff transparent transparent transparent;
+}
+
+/* 功能列內的小按鈕 */
+.action-bar-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #555555;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.action-bar-btn:hover {
+  background-color: #f0f0f0;
+  color: #000000;
+}
+
+/* 圖標大小 */
+.action-icon {
+  width: 16px;
+  height: 16px;
+}
+
+
+.message-row-container {
+  display: flex;
+  flex-direction: column; /* 讓泡泡在上面，功能列在下面 */
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+/* 自己發的（靠右對齊） */
+.align-right {
+  align-items: flex-end;
+}
+
+/* 別人發的（靠左對齊） */
+.align-left {
+  align-items: flex-start;
+}
+
+/* 💡 恢復乾淨的對話泡泡，把之前為了塞 ActionBar 硬加的 padding-bottom 拿掉 */
+.chat-bubble {
+  padding: 10px 14px; /* 回歸正常的內邊距，不再留空白 */
+  border-radius: 16px;
+  max-width: 70%;
+  word-break: break-all;
+}
+
+/* 💡 功能列樣式修正：拿掉所有 absolute 定位 */
+.message-action-bar {
+  display: flex;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 2px 6px;
+  margin-top: 4px; /* 💡 跟上方的對話泡泡稍微拉開 4px 的精緻微距 */
+  gap: 2px;
+  width: max-content;
+}
+
+/* 按鈕與圖標維持你原本好看的設定... */
+.action-bar-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+.action-bar-btn:hover {
+  background-color: #f1f5f9;
+}
+
+/*--------*/
+/* --- 整體與排版 --- */
+
+
+/* --- 狀態 1：展開的輸入框 (對應 ActiveToolbar) --- */
+.post-composer-large {
+  border: 1px solid #000;
+  border-radius: 6px;
+  background-color: #F9FAFB;
+  overflow: hidden;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  
+  /* 🛡️ 絕對防禦：明確告訴 Flexbox，無論空間多擠，都不准壓縮這個區塊 */
+  flex-shrink: 0; 
+}
+
+.post-textarea {
+  min-height: 100px;
+  border: none;
+  background: transparent;
+  padding: 12px;
+  resize: none;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+}
+
+/* 工具列通用底底座 */
+.toolbar-row {
+  display: flex;
+  border-top: 1px solid #000;
+  height: 36px;
+  background-color: #E5E7EB;
+}
+
+/* 工具列按鈕 */
+.toolbar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  border-right: 1px solid #000;
+  cursor: pointer;
+  color: #333;
+}
+
+/* 中間灰色空閒區域 */
+.toolbar-input-grey {
+  flex: 1;
+  border-right: 1px solid #000;
+  background-color: #D1D5DB; 
+}
+
+/* 送出/操作區塊 */
+.toolbar-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* --- 狀態 2：單行工具列 (對應 Toolbar 初始狀態) --- */
+.post-composer-small {
+  border: 1px solid #000;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  display: flex;
+  height: 36px;
+  background-color: #E5E7EB;
+}
+
+.frame-label {
+  font-size: 12px;
+  color: #9CA3AF;
+  margin-bottom: 8px;
+}
+
+/* --- 狀態 3：貼文卡片 (對應 CommentItem) --- */
+
+/* 下方按讚與留言區塊 */
+/********/
+
+
+/* Updated style for individual buttons */
+
+
+
+/********************/
+.post-card1 {
+  width: 550px;
+  min-height: 200px; /* 確保這裡是 min-height，不是 height */
+  background-color: #F3F4F6;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-body {
+  padding: 20px;
+  font-size: 18px;
+  color: #000;
+  flex: 1;
+  text-align: left; /* ✅ 新增這行 */
+}
+
+
+/* --- 下方按讚與留言區塊 --- */
+.post-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 20px;
+  flex-shrink: 0; /* 🛡️ 加上這行：保護按鈕區塊，確保它不會被壓縮或擠出畫面 */
+}
+
+/* --- 膠囊按鈕 --- */
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #FFFFFF;
+  background-color: #000000;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  transition: opacity 0.2s ease;
+}
+
+.action-btn:hover {
+  opacity: 0.8;
+}
+
+.avatar-photo{
+  position: relative;
+  border-radius: 40px;
+  top: 20px;
+  left: 20px;
+  background-color: red;
+  width:  40px;
+  height: 40px;
+}
+
+.personalData{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}

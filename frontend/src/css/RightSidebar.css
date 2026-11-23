@@ -1,0 +1,102 @@
+/* 右側邊欄整體外殼：作為絕對定位的基準 */
+.sidebar-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333333;
+}
+
+/* ==========================================================================
+   💡 分隔線 (Divider) 精準釘死在 3/8 (37.5%) 位置，絕不動搖
+   ========================================================================== */
+
+
+
+/* 右側邊欄整體外殼：改用 Flexbox 垂直排列 */
+.right-sidebar {
+  width: 400px;       /* 這裡改成你真正期望的寬度，例如 600px */
+  min-width: 400px;   /* 加上這行，確保最小寬度鎖死在設定值 */
+  flex-shrink: 0;     /* 關鍵：嚴格禁止被外層容器壓縮 */
+  
+  /* 下面維持你原本的設定 */
+  background-color: #ffffff;
+  border-left: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+/* ==========================================================================
+   上半部：通知區區塊 (精準佔據 37.5% 高度)
+   ========================================================================== */
+.notification-container {
+  height: 37.5%;
+  flex-shrink: 0;
+  padding: 20px 20px 10px 20px;
+  overflow-y: auto; /* 通知太多時可獨立滾動 */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+
+
+.notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ==========================================================================
+   分隔線：自然排列，不使用絕對定位
+   ========================================================================== */
+.sidebar-divider {
+  border: 0;
+  border-top: 1px solid #e0e0e0; /* 實體線條 */
+  margin: 0 20px; /* 左右留白 20px，與上下區塊的 padding 對齊 */
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   下半部：履歷與按鈕區 (佔據剩餘所有高度)
+   ========================================================================== */
+.bottom-section {
+  flex: 1; /* 自動填滿剩下的 62.5% */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* 內容過多時，整個下半部可滾動 */
+  box-sizing: border-box;
+}
+
+/* 新增 Stone 的框框容器 */
+.input-container {
+  display: flex;
+  justify-content: flex-end; /* 將按鈕穩穩地往右推 */
+  padding-right: 15px; /* 控制距離邊緣的空間，讓它落在「靠近中間的右上」 */
+  margin-bottom: 20px;
+  flex-shrink: 0; /* 確保框框不會因為時間軸太長而被壓扁 */
+}
+
+/* New Stone 按鍵樣式 */
+.new-stone-btn {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.new-stone-btn:hover {
+  background-color: #333333;
+}
+
+/* 時間軸區域 */
+.timeline-section {
+  display: flex;
+  flex-direction: column;
+}

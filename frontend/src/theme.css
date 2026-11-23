@@ -1,0 +1,133 @@
+/* ============================================================
+   theme.css — Emerald 綠色主題
+   收斂原本散落的配色（橘 / 紫 / 灰藍 / stone 灰）為單一主色系。
+   用法：在最上層（main.jsx 或 App.jsx）import "./theme.css"
+   ============================================================ */
+
+:root {
+  /* ---- 主色：Emerald ---- */
+  --color-primary-50:  #ecfdf5;
+  --color-primary-100: #d1fae5;
+  --color-primary-200: #a7f3d0;
+  --color-primary-300: #6ee7b7;
+  --color-primary-400: #34d399;
+  --color-primary-500: #10b981;   /* 主色基準 */
+  --color-primary-600: #059669;   /* 按鈕預設 */
+  --color-primary-700: #047857;   /* 按鈕 hover */
+  --color-primary-800: #065f46;
+  --color-primary-900: #064e3b;
+
+  /* ---- 語意化別名（畫面元素直接對應這幾個就好）---- */
+  --color-accent:        var(--color-primary-600);  /* 主要強調色：按鈕、連結、讚 */
+  --color-accent-hover:  var(--color-primary-700);  /* 上述的 hover */
+  --color-accent-soft:   var(--color-primary-100);  /* 淡底：tag、被選中項 */
+  --color-accent-text:   var(--color-primary-700);  /* 綠色文字（日期、強調字）*/
+
+  /* ---- 中性灰（其餘一律降為中性，避免搶主色）---- */
+  --color-bg:        #f9fafb;   /* 頁面底 */
+  --color-surface:   #ffffff;   /* 卡片底 */
+  --color-border:    #e5e7eb;   /* 邊框 / 分隔線 */
+  --color-text:      #111827;   /* 主文字 */
+  --color-text-sub:  #6b7280;   /* 次要文字 */
+  --color-text-mute: #9ca3af;   /* 更淡的提示字 */
+
+  /* ---- 圓角 ---- */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+}
+
+/* ============================================================
+   元件語意 class — 對應你畫面上的各區塊
+   （Tailwind 仍可並用；這裡只接管「顏色」這件事）
+   ============================================================ */
+
+/* ---- 主按鈕：Post / 建立 / New Stone ---- */
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: background-color 0.15s ease;
+}
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+}
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---- 次按鈕：取消 ---- */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-text-sub);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: background-color 0.15s ease;
+}
+.btn-ghost:hover {
+  background-color: #f3f4f6;
+}
+
+/* ---- 頭像（原本橘色 → 綠色）---- */
+.avatar {
+  background-color: var(--color-accent);
+  color: #fff;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* ---- 卡片：貼文 / followers 列 ---- */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* ---- 讚（active 狀態，原本紫色 → 綠色）---- */
+.like-active {
+  color: var(--color-accent);
+}
+
+/* ---- 時間軸圓點（原本灰藍 → 綠色）---- */
+.timeline-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  flex-shrink: 0;
+  z-index: 10;
+  transition: background-color 0.15s ease;
+}
+.timeline-dot:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* ---- 時間軸連接線 ---- */
+.timeline-line {
+  width: 2px;
+  flex: 1 1 0%;
+  background-color: var(--color-primary-200);   /* 淡綠線，跟圓點同色系 */
+}
+
+/* ---- 時間軸日期文字 ---- */
+.timeline-date {
+  color: var(--color-text-sub);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ---- tag / 被選中項 的淡綠底 ---- */
+.chip {
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent-text);
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+}

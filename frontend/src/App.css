@@ -1,0 +1,24 @@
+/* App.css */
+
+/* 初始化，確保網頁底層是乾淨的白色（或你想要的任何底色） */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; 
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 核心：這三個欄位加起來只佔畫面的 75% (3/4 版) */
+.three-column-wrapper {
+  display: flex;
+  width: 100%;           /* 關鍵：強迫三欄總寬度只佔 3/4 */
+  max-width: 1500px;     /* 設定最大寬度，在大螢幕上不至於被拉得太散 */
+  height: 100vh;         /* 高度依然頂天立地撐滿 */
+  margin: 0 auto;        /* 關鍵：自動分配左右兩側的空間，達到完美置中留白 */
+  overflow: hidden;      /* 防止外層出現滑輪 */
+}

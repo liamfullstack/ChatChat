@@ -1,0 +1,183 @@
+.post-detail-page{
+    max-width: 600px;
+    width: 100%;
+      height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto; /* 外層整體鎖住，不准動 */
+}
+
+.upbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 25px;
+    margin: 30px;
+    align-items: center;
+    background-color: #D7F2E9;
+    border-radius: 15px;
+}
+
+.post-body1{
+    min-height: 343px;
+    background-color: #dff6fc;
+    margin:30px 20px 0px 20px;
+    border-radius: 15px 15px 0px 0px;
+    padding: 20px;
+    text-align: left;
+     flex-shrink: 0; 
+}
+.ArrowIcon{
+    width: 30px;
+    height: 30px;
+}
+
+.comments-section {
+  background-color: #FADCE0;
+  border-radius: 0 0 15px 15px;
+  padding: 20px;
+  margin: 0px 20px 0px 20px;
+   flex: 1; /* 自動吃掉剩下的空間 */
+   
+}
+
+.comment-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.comment-icon {
+  font-size: 20px;
+}
+
+.comment-input {
+  flex: 1;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  background-color: #fff;
+}
+
+.comment-send-btn {
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.comment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.comment-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #ccc;
+  flex-shrink: 0;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-username {
+  font-weight: bold;
+  text-align: right;
+  margin-bottom: 8px;
+}
+
+.comment-text-placeholder {
+  background-color: #eee;
+  height: 30px;
+  border-radius: 6px;
+}
+
+.comment-text {
+  background-color: transparent;
+  margin-bottom: 8px;
+}
+
+.comment-reply-btn {
+  border: none;
+  background: none;
+  color: #888;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.reply-input-bar {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.reply-input-bar input {
+  flex: 1;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.comment-children {
+  border-left: 2px solid rgba(0, 0, 0, 0.1);
+  padding-left: 15px;
+  margin-top: 10px;
+}
+
+.send-btn{
+    width: 30px;
+}
+
+.comment-block{
+    display: flex;
+    justify-content: space-around;
+}
+
+.comment-list{
+     max-height:  50vh;    /* 限制最大高度，數值請依你的實際畫面需求微調 */
+    overflow-y: auto;     /* 當內容超過高度時，自動顯示 Y 軸捲軸 */
+    padding-right: 5px;
+      padding-bottom: 50px;
+      scrollbar-width: none;
+  
+  /* IE / 舊版 Edge */
+  -ms-overflow-style: none;
+}
+
+.comment-reply{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+.comment-count{
+    margin: 0px 0px 20px 10px;
+    display: flex;
+}
+
+.comment-count-real{
+    margin-left: 20px;
+}
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.comment-list::-webkit-scrollbar {
+  /* Chrome / Safari / 新版 Edge（webkit 引擎） */
+  display: none;
+}

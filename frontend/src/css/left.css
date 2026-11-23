@@ -1,0 +1,305 @@
+.left-sidebar {
+  width: 400px;
+  height: 100%;
+  background-color: #e0f2f1; /* 設計稿的淺綠底色 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  flex-shrink: 0;
+  overflow-x: hidden; /* 關鍵：強制隱藏超出 X 軸的內容 */
+  overflow-y: auto;   /* 保留 Y 軸的上下滾動能力 */
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  background-color: #cbd5e1;
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+
+.username {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 24px;
+}
+
+.line-divider {
+  width: 100%;                /* 撐滿中欄的寬度 */
+  height: 3px;                /* 線條厚度 */
+  background-color: #658cd8;  /* 線條顏色 */
+  margin: 16px 0;             /* 上下間距 */
+}
+
+
+
+/* 個人檔案區 */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  width: 110px;
+  height: 110px;
+  background-color: #cbd5e1; /* 灰色大圓頭像 */
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.username-tag {
+  background-color: #f1f5f9; /* 名字的特殊圓角白底襯底 */
+  padding: 8px 32px;
+  border-radius: 12px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #000000;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* 橫向分隔線 */
+.sidebar-divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #333333; /* 設計稿上那條深色分隔線 */
+  margin: 0 0 24px 0;
+}
+
+/* 列表容器 */
+.menu-list {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* 每個橫條之間的間距 */
+}
+
+/* 獨立的選單橫條 */
+.menu-item {
+  width: 100%;
+  height: 48px;
+  background-color: #d1d5db; /* 橫條的灰色背景 */
+  border-radius: 14px;       /* 圓角外框 */
+  display: flex;
+  align-items: center;       /* 讓內部所有圖示垂直置中 */
+  padding: 0 12px;           /* 左右內縮留白 */
+  gap: 10px;                 /* 元件與元件之間的左右間距 */
+}
+
+/* 1. 紅色圓形 */
+.icon-red-circle {
+  width: 26px;
+  height: 26px;
+  background-color: #e57373; /* 設計稿的珊瑚紅/粉紅 */
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* 2. 中間白色長條 */
+.content-white-bar {
+  flex: 1;                   /* 核心：自動填滿中間所有剩餘的寬度 */
+  height: 24px;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+/* 3. 黃色圓形 */
+.icon-yellow-circle {
+  width: 22px;
+  height: 22px;
+  background-color: #fff59d; /* 淺黃色 */
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* 4. 最右側正方形 */
+.icon-square {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;        /* 微圓角正方形 */
+  flex-shrink: 0;
+}
+
+/* components/LeftSidebar.css 局部修改 */
+
+/* 【核心修改】取代原本的 .icon-red-circle */
+.item-avatar {
+  width: 28px;               /* 稍微放大一點點，讓頭像更清晰 */
+  height: 28px;
+  border-radius: 50%;        /* 關鍵：強制變成正圓形頭像框 */
+  
+  /* 務實核心：確保不論原始圖片比例如何，都會自動縮放並居中裁切，絕對不變形 */
+  object-fit: cover;         
+  
+  border: 1px solid #ffffff; /* 可選：幫小頭像加一個白色細邊框，質感會更好 */
+  flex-shrink: 0;            /* 防止圖片被擠壓 */
+}
+
+/* 以下維持不變 */
+.menu-item {
+  width: 100%;
+  height: 48px;
+  background-color: #d1d5db; 
+  border-radius: 14px;       
+  display: flex;
+  align-items: center;       
+  padding: 0 12px;           
+  gap: 10px;                 
+}
+
+.content-white-bar {
+  flex: 1;                   
+  height: 24px;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+.icon-yellow-circle {
+  width: 22px;
+  height: 22px;
+  background-color: #fff59d; 
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.icon-square {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;        
+  flex-shrink: 0;
+}
+
+.icon-state{
+    width: 100%;            /* 讓表情符號貼合黃色圓圈的大小 */
+  height: 100%;
+  object-fit: cover;
+}
+
+/* left.css 新增部分 */
+
+/* 確保左側欄在內容過多時也能自身滾動，或者把滑塊推到最底 */
+.left-sidebar {
+  /* ...原本的設定... */
+  /* 如果你希望滑動區塊永遠在最下方，可以加上 justify-content: space-between; 但目前先用 margin-top: auto 推下去 */
+  overflow-y: auto; /* 確保整個左側欄可以上下滾動 */
+}
+
+/* 幻燈片容器 */
+.slider-container {
+  margin-top: auto; /* 將此區塊推到側邊欄的最下方 */
+  padding-top: 24px;
+  width: 100%;
+}
+
+.slider-title {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+/* 核心：水平滑動軌道 */
+.posts-slider {
+  display: flex;
+  gap: 12px; /* 卡片之間的間距 */
+  overflow-x: auto; /* 允許水平滾動 */
+  padding-bottom: 12px; /* 留一點空間給可能的滾動條或陰影 */
+  
+  /* 讓滑動有「吸附」的幻燈片手感 */
+  scroll-snap-type: x mandatory; 
+  scroll-behavior: smooth;
+}
+
+/* 隱藏水平滾動條（讓畫面更乾淨） */
+.posts-slider::-webkit-scrollbar {
+  display: none;
+}
+.posts-slider {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 獨立卡片樣式 */
+.post-card {
+  flex-shrink: 0; 
+  width: 240px;   
+  min-height: 400px;       /* 【核心修改】從原本的 160px 放大到 240px */
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  scroll-snap-align: start; 
+  user-select: none;
+}
+
+/* 2. 調整圖片高度，維持好看的比例 */
+.post-image {
+  width: 100%;
+  height: 135px;         /* 【核心修改】從 90px 放大到 135px (大約是 16:9 的舒服比例) */
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* 3. 增加內部文字區塊的呼吸空間 */
+.post-info {
+  padding: 14px;         /* 【微調】內縮空間稍微加大，才不會覺得文字太擠 */
+}
+
+/* 4. 標題字體稍微放大 */
+.post-info h5 {
+  margin: 0 0 6px 0;
+  font-size: 16px;       /* 【微調】從 14px 放大到 16px */
+  font-weight: bold;
+  color: #1f2937;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+/* 5. 內文字體與行高優化 */
+.post-info p {
+  margin: 0;
+  font-size: 13px;       /* 【微調】從 12px 放大到 13px */
+  color: #6b7280;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;      /* 【微調】增加行高，提升大卡片的閱讀舒適度 */
+}
+
+/* 【新增】追蹤人數區塊 */
+.follower-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d1d5db; /* 與選單一致的灰色 */
+  border-radius: 12px;
+  padding: 8px 16px;
+  margin-top: 16px;
+  gap: 16px;
+  width: 200px;
+}
+
+.follower-stats span {
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 16px;
+  background-color: #1f2937;
+}
+
+.sidebar-divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #333333;
+  margin: 24px 0;
+}

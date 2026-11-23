@@ -1,0 +1,73 @@
+/* 每一筆經歷的外殼 */
+.timeline-item {
+  display: flex;
+  position: relative;
+  min-height: 85px; /* 給定一個務實高度，確保直線有空間向下延伸 */
+}
+
+/* 左側：裝載直線與圓圈的容器 */
+.timeline-badge-container {
+  width: 30px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* 垂直黑色直線：利用偽元素 (::before) 來做，這樣高度會自動填滿 */
+.timeline-badge-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background-color: #000000; /* 原汁原味的黑色垂直線 */
+  transform: translateX(-50%);
+}
+
+/* 畫面上黑色的實心小圓圈 */
+.timeline-badge {
+  position: absolute;
+  top: 6px; /* 調整圓圈的上下位置，使其與右側文字第一行對齊 */
+  width: 10px;
+  height: 10px;
+  background-color: #000000; /* 黑色圓點 */
+  border-radius: 50%;
+  z-index: 1; /* 確保圓圈壓在直線上方 */
+}
+
+/* 右側：文字內容與按鈕區 */
+.timeline-content {
+  flex: 1;
+  padding-left: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 讓按鈕靠左對齊 */
+}
+
+/* 經歷內文 */
+.timeline-text {
+  font-size: 0.95rem;
+  margin: 0 0 8px 0;
+  color: #000000;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* New Stone 按鈕 */
+.new-stone-btn {
+  background-color: #000000; /* 黑色按鈕 */
+  color: #ffffff;
+  border: none;
+  border-radius: 20px; /* 圓角按鈕 */
+  padding: 4px 14px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.new-stone-btn:hover {
+  background-color: #333333; /* 懸浮時稍微變深 */
+}
